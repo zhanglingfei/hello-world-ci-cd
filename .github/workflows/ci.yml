@@ -19,7 +19,9 @@ jobs:
           docker tag hello-world:${{ github.sha }} gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-world:${{ github.sha }}
 
       - name: Login to Google Container Registry
-        run: echo ${{ secrets.GCP_SA_KEY }} | docker login -u _json_key --password-stdin https://gcr.io
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: echo $GCP_SA_KEY | base64 --decode | docker login -u _json_key --password-stdin https://gcr.io
 
       - name: Push Docker image
         run: |
