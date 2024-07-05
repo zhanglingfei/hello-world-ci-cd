@@ -7,21 +7,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to Google Container Registry
-        uses: docker/login-action@v1
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.1
         with:
-          registry: gcr.io
-          username: _json_key
-          password: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker gcr.io --quiet
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: |
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-world:${{ github.sha }}
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-world:latest
+        env:
+          GCR_HOSTNAME: gcr.io
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        run: |
+          docker build -t ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }} .
+          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }}
+          docker tag ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }} ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:latest
+          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:latest
