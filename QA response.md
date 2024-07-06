@@ -1,27 +1,26 @@
 
-● Cloud Provider - GCP (DONE)
-● Web Application - Take an existing open-source web application project including frontend, backend, and database. （UPDATE: create a hello-world and not a web application)
+● Cloud Provider - GCP (***DONE***)
+● Web Application - Take an existing open-source web application project including frontend, backend, and database. （UPDATE: ***create a hello-world and not a web application***)
 ● Infrastructure as Code - Use tools like Terraform to host the application in the cloud. 
- Feedback:
+ ***Feedback***:
 Terraform is primarily an Infrastructure as Code (IaC) tool designed for managing and provisioning cloud resources, not for directly hosting applications. It excels at creating and configuring infrastructure components like virtual machines, networks, and storage, which are necessary for running applications. However, Terraform does not handle the actual deployment or runtime management of applications themselves.
 For application hosting, tools like Kubernetes, Docker, or platform-specific services are typically used in conjunction with the infrastructure Terraform sets up. Terraform creates the environment where applications can be hosted, but it doesn't manage the application lifecycle directly.
 
-● Continuous Integration - Create a CI pipeline using GitHub actions (preferred but you can use others as well), and the required stages that you think would add value. (DONE)
-● Docker - Create a docker image from the CI. (DONE)
-● Continuous Deployment - Automate the deployment process using Kubernetes. Include deployment to minimize downtime and risk. (DONE)
+● Continuous Integration - Create a CI pipeline using GitHub actions (preferred but you can use others as well), and the required stages that you think would add value. (***DONE***)
+● Docker - Create a docker image from the CI. (***DONE***)
+● Continuous Deployment - Automate the deployment process using Kubernetes. Include deployment to minimize downtime and risk. (***DONE***)
 ● Monitoring and logging - Integrate monitoring and logging solutions to collect logs from infrastructure and applications. Describe how you can use these tools for detecting and troubleshooting issues. 
 Feedback:
+For monitoring and logging on Google Cloud Platform, I would leverage GCP's native Cloud Operations suite (formerly Stackdriver). This integrated solution provides comprehensive observability for both GCP services and custom applications.
 
-"For monitoring and logging on Google Cloud Platform, I would leverage GCP's native Cloud Operations suite (formerly Stackdriver). This integrated solution provides comprehensive observability for both GCP services and custom applications.
-
-Key components would include:
+***Key components would include***:
 
 1. Cloud Monitoring: For real-time metrics, dashboards, and alerting on both infrastructure and application performance.
 2. Cloud Logging: To centralize and analyze logs from all GCP services and custom applications.
 3. Cloud Trace: For distributed tracing across microservices to understand request flows and latencies.
 4. Error Reporting: To aggregate and notify on application errors.
 
-Implementation steps:
+***Implementation steps***:
 
 1. Enable Cloud Operations API for the project.
 2. Configure Cloud Monitoring agents on Compute Engine instances or use built-in monitoring for managed services like GKE.
@@ -31,14 +30,12 @@ Implementation steps:
 6. Configure alerting policies for proactive notifications on system anomalies.
 
 For troubleshooting, we'd use Cloud Logging's advanced query language to correlate logs across services, Cloud Trace to identify performance bottlenecks, and Error Reporting to quickly isolate and diagnose application errors.
-
 A practical example: If a Cloud Monitoring alert indicates high latency in a GKE cluster, we'd use Cloud Trace to identify the slow microservice, then dive into Cloud Logging to examine relevant container logs and Error Reporting for any related application errors."
 
 
 
 ● Security - Describe the security considerations. 
 Feedback:
-
 ### Security Considerations:
 
 1. **Secure CI/CD Pipeline:**
