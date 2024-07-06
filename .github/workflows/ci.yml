@@ -54,7 +54,9 @@ jobs:
 
       - name: Update deployment.yaml
         run: |
-          sed -i 's|gcr.io/gentle-dominion-245803/hello-world:latest|gcr.io/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }}|' kubernetes/deployment.yaml
+          sed -i "s|gcr.io/gentle-dominion-245803/hello-world:latest|gcr.io/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }}|" kubernetes/deployment.yaml
+          sed -i "s|\${GCP_PROJECT_ID}|$GCP_PROJECT_ID|g" kubernetes/deployment.yaml
+          sed -i "s|\${IMAGE}|$IMAGE|g" kubernetes/deployment.yaml
 
       - name: Deploy to GKE
         run: |
