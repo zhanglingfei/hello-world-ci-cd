@@ -44,6 +44,14 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
 
+      - name: Verify Project ID
+        run: |
+          DEPLOYMENT_PROJECT_ID=$(grep -oP 'gcr.io/\K[^/]+' kubernetes/deployment.yaml)
+          if [ "$DEPLOYMENT_PROJECT_ID" != "$GCP_PROJECT_ID" ]; then
+            echo "Warning: Project ID in deployment.yaml ($DEPLOYMENT_PROJECT_ID) does not match GCP_PROJECT_ID ($GCP_PROJECT_ID)"
+            exit 1
+          fi
+
       - name: Update deployment.yaml
         run: |
           sed -i 's|gcr.io/gentle-dominion-245803/hello-world:latest|gcr.io/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }}|' kubernetes/deployment.yaml
