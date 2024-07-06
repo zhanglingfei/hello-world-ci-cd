@@ -97,15 +97,11 @@ Feedback:
   - Include instructions on setting up and configuring monitoring and alerting systems for security events.
   - Document the process for regular security audits and vulnerability scans.
 
-By following these best practices, you can ensure a secure containerized web solution on GKE with a robust CI/CD pipeline using GitHub Actions.
-
---- 
-
-This detailed description covers various security aspects necessary for a containerized web solution on GKE, ensuring a secure deployment pipeline and environment.
-
+By following these best practices, one can ensure a secure containerized web solution on GKE with a robust CI/CD pipeline using GitHub Actions.
 
 ● Documentation/readme.md - Provide detailed documentation of the architecture and implementation process. Add all the details of the setup and deployment instructions and an explanation of the choices of the tools and processes that have been made. Document any assumptions made during the assignment and explain the rationale behind design decisions. 
+   - This requirements is too much efforts and I could not complete in an interview process.
 
 ● The assignment needs to be done with the release to production mindset. （UPDATE)
 Upon reviewing the assignment requirements, I believe delivering a full-featured production solution involves significant time and cost, particularly with GCP resource spending. Setting up and maintaining GCP resources, even temporarily, incurs real costs, which might be substantial for an interview assignment.
-To effectively demonstrate my production mindset without incurring these costs, I propose providing a detailed paper Proof of Concept (PoC).
+   - To effectively demonstrate my production mindset without incurring these costs, I propose providing a detailed paper Proof of Concept (PoC).
