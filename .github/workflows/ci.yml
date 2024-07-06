@@ -48,7 +48,7 @@ jobs:
         env:
           PROJECT_ID: gentle-dominion-245803
           IMAGE_NAME: hello-world
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: latest
         run: |
           kubectl apply -f kubernetes/deployment.yaml
           kubectl rollout status deployment/hello-world
