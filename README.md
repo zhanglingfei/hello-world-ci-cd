@@ -11,7 +11,7 @@ gcloud container clusters create hello-world-cluster-tokyo \
   --enable-autoscaling \
   --min-nodes 0 \
   --max-nodes 3 \
-  --project gentle-dominion-245803
+  --project <google-cloud-projectid>
 
 
 
