@@ -59,7 +59,19 @@ jobs:
           sed -i "s|\${IMAGE}|$IMAGE|g" kubernetes/deployment.yaml
 
       - name: Deploy to GKE
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          IMAGE_NAME: hello-world
+          IMAGE_TAG: ${{ github.sha }}
         run: |
+          # Apply the Kubernetes manifests
           kubectl apply -f kubernetes/deployment.yaml
+      
+          # Wait for the deployment to complete
           kubectl rollout status deployment/hello-world
+      
+          # Display information about the services
           kubectl get services -o wide
+      
+          # Optionally, display information about the pods
+          kubectl get pods -l app=hello-world
