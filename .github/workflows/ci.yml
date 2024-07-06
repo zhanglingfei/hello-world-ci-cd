@@ -46,10 +46,14 @@ jobs:
 
       - name: Verify Project ID
         run: |
-          DEPLOYMENT_PROJECT_ID=$(grep -oP 'gcr.io/\K[^/]+' kubernetes/deployment.yaml)
-          if [ "$DEPLOYMENT_PROJECT_ID" != "$GCP_PROJECT_ID" ]; then
+          DEPLOYMENT_PROJECT_ID=$(grep -oP '\$\(PROJECT_ID\)|\$PROJECT_ID|gcr.io/\K[^/]+' kubernetes/deployment.yaml | head -n1)
+          if [ "$DEPLOYMENT_PROJECT_ID" = '$(PROJECT_ID)' ] || [ "$DEPLOYMENT_PROJECT_ID" = '$PROJECT_ID' ]; then
+            echo "Project ID in deployment.yaml is using a variable, which is correct."
+          elif [ "$DEPLOYMENT_PROJECT_ID" != "$GCP_PROJECT_ID" ]; then
             echo "Warning: Project ID in deployment.yaml ($DEPLOYMENT_PROJECT_ID) does not match GCP_PROJECT_ID ($GCP_PROJECT_ID)"
             exit 1
+          else
+            echo "Project ID in deployment.yaml matches GCP_PROJECT_ID"
           fi
 
       - name: Update deployment.yaml
