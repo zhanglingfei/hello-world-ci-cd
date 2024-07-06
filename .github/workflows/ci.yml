@@ -1,7 +1,14 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 on: [push, pull_request]
+
+env:
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: hello-world-cluster-tokyo
+  GKE_ZONE: asia-northeast1-a
+  IMAGE: hello-world
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,9 +32,24 @@ jobs:
       - name: Build and push Docker image
         env:
           GCR_HOSTNAME: gcr.io
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
-          docker build -t ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }} .
-          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }}
-          docker tag ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:${{ github.sha }} ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:latest
-          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/hello-world:latest
+          docker build -t ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }} .
+          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }}
+          docker tag ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }} ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/${IMAGE}:latest
+          docker push ${GCR_HOSTNAME}/${GCP_PROJECT_ID}/${IMAGE}:latest
+
+      - name: Get GKE Credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+
+      - name: Update deployment.yaml
+        run: |
+          sed -i 's|gcr.io/gentle-dominion-245803/hello-world:latest|gcr.io/${GCP_PROJECT_ID}/${IMAGE}:${{ github.sha }}|' kubernetes/deployment.yaml
+
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f kubernetes/deployment.yaml
+          kubectl rollout status deployment/hello-world
+          kubectl get services -o wide
