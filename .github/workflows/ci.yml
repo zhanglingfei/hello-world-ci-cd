@@ -46,7 +46,7 @@ jobs:
 
       - name: Deploy to GKE
         env:
-          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          PROJECT_ID: gentle-dominion-245803
           IMAGE_NAME: hello-world
           IMAGE_TAG: ${{ github.sha }}
         run: |
