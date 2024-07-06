@@ -1,6 +1,5 @@
 name: CI/CD Pipeline
 on: [push, pull_request]
-
 env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GKE_CLUSTER: hello-world-cluster-tokyo
@@ -44,11 +43,11 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
 
+      - name: Update deployment file
+        run: |
+          sed -i 's|image: .*|image: gcr.io/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}|' kubernetes/deployment.yaml
+
       - name: Deploy to GKE
-        env:
-          PROJECT_ID: gentle-dominion-245803
-          IMAGE_NAME: hello-world
-          IMAGE_TAG: latest
         run: |
           kubectl apply -f kubernetes/deployment.yaml
           kubectl rollout status deployment/hello-world
