@@ -71,4 +71,19 @@ Implementing all aspects of a production mindset in an interview setting would b
    - Discuss the importance of data backups and a basic recovery plan
 
 For an interview setting, implement these core elements to demo the solution on paper in project and be prepared to discuss other production considerations. Explain that while a full production setup would include more comprehensive measures, these key points demonstrate the understanding of production-readiness without overcomplicating the interview project.
-Remember to emphasize that in a real job scenario, you would work with the team to implement a more comprehensive set of production practices tailored to the specific needs and scale of the project.
+Remember to emphasize that in a real job scenario, you would work with the team to implement a more comprehensive set of production practices tailored to the specific needs and scale of the project.<br>
+
+***日本語で簡単説明：***
+面接の設定において、以下の核心的な要素をプロジェクトに実装し、ペーパー上でソリューションをデモンストレーションします。また、その他の本番環境に関する考慮事項についても議論する準備をしておきます：
+
+- 基本的なリンティングとコードフォーマッティングの実装（例：ESLint、Prettier）
+- 重要な機能に対するユニットテストの作成
+- GitHub Actionsを使用した簡単なCI/CDパイプラインのセットアップ
+- 機密データに対する環境変数またはシークレット管理の使用
+- アプリケーションの基本的な認証の実装
+- 基本的なアプリケーションログの実装
+- Kubernetes YAMLファイルを使用したデプロイメントとサービスの定義
+- セットアップと実行手順を含む明確なREADME.mdの提供
+
+説明：完全な本番環境のセットアップにはより包括的な対策が含まれますが、これらの重要なポイントは本番環境への準備の理解を示すものであり、面接プロジェクトを過度に複雑にすることなく実装できます。実際の仕事のシナリオでは、プロジェクトの具体的なニーズと規模に合わせて、より包括的な本番環境のプラクティスをチームと協力して実装することを強調します。
+この方法により、本番環境の準備に関する知識を示しつつ、面接プロジェクトを管理可能な範囲に保つことができます。また、より広範な本番環境の考慮事項について議論する機会も提供します。
