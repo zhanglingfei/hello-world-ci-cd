@@ -29,6 +29,8 @@ gcloud container clusters create hello-world-cluster-tokyo \
 
 ## Overview
 This project demonstrates a simple "Hello World" application deployed on Google Kubernetes Engine (GKE) using a CI/CD pipeline configured with GitHub Actions. The deployment utilizes containerized environments managed via Docker, with infrastructure defined and managed using Terraform.
+![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/a2175734-922b-40fa-a1cf-5f2cd894754c)
+
 
 ## Architecture
 ### Components
@@ -76,16 +78,41 @@ This project demonstrates a simple "Hello World" application deployed on Google 
 # Deployment Instructions
 ## Using GitHub Actions
 
-### Push Code to GitHub
-- Any push to the main branch will trigger the CI/CD pipeline configured in `.github/workflows/ci.yml`.
+### Kubernetes Configuration
+The project includes the following Kubernetes configuration files in the k8s/ directory:
 
-### Monitor Deployment
-- Check GitHub Actions logs for build and deployment status.
-- Verify the deployment in the GKE cluster:
-  ```sh
-  gcloud container clusters get-credentials hello-world-cluster-tokyo --zone asia-northeast1-a --project your-gcp-project-id
-  kubectl get pods
-  kubectl get services
+- `deployment.yaml`: Defines the Kubernetes Deployment for the application.
+- `service.yaml`: Defines the Kubernetes Service to expose the application.
+- `ingress.yaml`: (If applicable) Defines the Ingress resource for routing external traffic.
+
+These files are automatically applied by the CI/CD pipeline during the deployment process.
+
+### CI/CD Pipeline
+The deployment process is fully automated through a CI/CD pipeline configured in `.github/workflows/ci.yml`. Here's an overview of how it works:
+
+### Trigger:<br>
+Any push to the main branch triggers the pipeline.<br>
+### Exceptions: <br>
+Changes to README.md, QA folder, and Terraform folder do not trigger the pipeline.<br>
+### Pipeline Steps:<br>
+The CI/CD pipeline performs the following steps automatically:<br>
+a. Checks out the code <br>
+b. Sets up the Google Cloud SDK<br>
+c. Authenticates with Google Cloud<br>
+d. Builds the Docker image<br>
+e. Pushes the image to Google Container Registry (GCR)<br>
+f. Deploys to GKE:<br>
+
+Applies any changes in the deployment.yaml file Updates the deployment with the new image
+
+### Deployment Process: <br>
+The pipeline uses `kubectl apply -f k8s/deployment.yaml` to apply any changes to the deployment configuration.<br>
+It then updates the deployment with the new image using kubectl set image.<br>
+### Service and Ingress:<br>
+
+If there are changes to service.yaml or ingress.yaml, these are also applied during the deployment process.<br>
+Note: The current pipeline does not perform linting or static code analysis. These steps should be added in a production environment.
+
 
 # Tool Choices and Rationale
 
@@ -112,9 +139,9 @@ This project demonstrates a simple "Hello World" application deployed on Google 
 - **Image Security:** Use trusted base images, regularly update them, and scan Docker images for vulnerabilities using tools like Trivy or Clair.
 - **Least Privilege Principle:** Run containers with the least privilege required. Avoid running containers as the root user.
 - **Immutable Infrastructure:** Treat containers as immutable; rebuild and redeploy rather than patching running containers.
-- gcloud services enable containeranalysis.googleapis.com
-- gcloud services enable binaryauthorization.googleapis.com
-- gcloud services enable containerscanning.googleapis.com
+- `gcloud services enable containeranalysis.googleapis.com`
+- `gcloud services enable binaryauthorization.googleapis.com`
+- `gcloud services enable containerscanning.googleapis.com`
 
 - ![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/7ceb8ddd-a9a6-4504-8d38-1fd28d91579b)
 
