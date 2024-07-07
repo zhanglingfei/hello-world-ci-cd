@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node.js Demo App</title>
+    <title>CRM-like Node.js Demo App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,14 +13,14 @@
             background-color: #f4f4f4;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h1 {
+        h1, h2 {
             color: #333;
         }
         #info {
@@ -33,27 +33,98 @@
             background-color: #4CAF50;
             border: none;
             color: white;
-            padding: 15px 32px;
+            padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 14px;
             margin: 4px 2px;
             cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Node.js Demo App</h1>
-        <p>This is a simple Node.js web application deployed on Kubernetes for interview demonstration.</p>
+        <h1>CRM-like Node.js Demo App</h1>
+        <p>This is a simple Node.js web application with CRM-like features deployed on Kubernetes for interview demonstration.</p>
+        
         <div id="info">
             <p><strong>App Info:</strong></p>
             <p id="appInfo">Loading...</p>
         </div>
         <button onclick="fetchInfo()">Fetch App Info</button>
-    </div>
 
+        <h2>Customer Management</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="lead">Lead</option>
+            </select>
+        </div>
+        <button onclick="addCustomer()">Add Customer</button>
+
+        <h2>Customer List</h2>
+        <table id="customerTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                    <td>Active</td>
+                    <td><button onclick="editCustomer(this)">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>jane@example.com</td>
+                    <td>Lead</td>
+                    <td><button onclick="editCustomer(this)">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <script>
         function fetchInfo() {
             fetch('/api/info')
@@ -68,6 +139,44 @@
                     console.error('Error:', error);
                     document.getElementById('appInfo').innerHTML = 'Failed to fetch app info';
                 });
+        }
+
+        function addCustomer() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const status = document.getElementById('status').value;
+            
+            if (name && email) {
+                const table = document.getElementById('customerTable').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+                newRow.innerHTML = `
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${status}</td>
+                    <td><button onclick="editCustomer(this)">Edit</button></td>
+                `;
+                
+                // Clear form fields
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('status').value = 'active';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        function editCustomer(button) {
+            const row = button.parentNode.parentNode;
+            const name = row.cells[0].innerText;
+            const email = row.cells[1].innerText;
+            const status = row.cells[2].innerText;
+
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+            document.getElementById('status').value = status.toLowerCase();
+
+            // Remove the edited row
+            row.parentNode.removeChild(row);
         }
     </script>
 </body>
