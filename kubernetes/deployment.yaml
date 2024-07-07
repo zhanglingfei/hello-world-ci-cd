@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hello-world
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: hello-world
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: gcr.io/gentle-dominion-245803/hello-world:latest  # 更新为你的镜像地址
+        image: gcr.io/gentle-dominion-245803/hello-world:latest  # upate 
         ports:
         - containerPort: 8080
         resources:
@@ -43,15 +43,3 @@ spec:
           value: "production"
         - name: PORT
           value: "8080"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-world-service
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 8080
-  selector:
-    app: hello-world

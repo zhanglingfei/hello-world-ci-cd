@@ -62,6 +62,8 @@ jobs:
       - name: Deploy to GKE
         run: |
           kubectl apply -f kubernetes/deployment.yaml
+          kubectl apply -f k8s/service.yaml
           kubectl rollout status deployment/hello-world
           kubectl get services -o wide
           kubectl get pods -l app=hello-world
+
