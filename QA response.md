@@ -5,17 +5,16 @@
 
 ● Infrastructure as Code - Use tools like Terraform to host the application in the cloud. <br> (***DONE***)<br>
  ***Feedback***:
-Terraform is primarily an Infrastructure as Code (IaC) tool designed for managing and provisioning cloud resources, not for directly hosting applications. It excels at creating and configuring infrastructure components like virtual machines, networks, and storage, which are necessary for running applications. However, Terraform does not handle the actual deployment or runtime management of applications themselves.<br>
-For application hosting, tools like Kubernetes, Docker, or platform-specific services are typically used in conjunction with the infrastructure Terraform sets up. Terraform creates the environment where applications can be hosted, but it doesn't manage the application lifecycle directly.
+Terraform is primarily an Infrastructure as Code (IaC) tool designed for managing and provisioning cloud resources, not for directly hosting applications.  However, Terraform does not handle the actual deployment or runtime management of applications themselves.For application hosting, tools like Kubernetes, Docker, or platform-specific services are typically used in conjunction with the infrastructure Terraform sets up. Terraform creates the environment where applications can be hosted, but it doesn't manage the application lifecycle directly.
 
 ● Continuous Integration - Create a CI pipeline using GitHub actions (preferred but you can use others as well), and the required stages that you think would add value. (***DONE***)<br>
 ***Code Quality and Testing:***
-- Add a linting step for your JavaScript code
+- Add a linting step for JavaScript code
 - Include unit testing
 - Add code coverage reporting
 ***Security Scanning:***
--Implement a vulnerability scan for your Docker image （**DONE by GCP**)
-- Add a step to check for sensitive information in your code (**DONE by Github**)<br>
+-Implement a vulnerability scan for  Docker image （**DONE by GCP**)
+- Add a step to check for sensitive information in code (**DONE by Github**)<br>
 ***Performance:***
 -Implement caching for npm packages to speed up builds<br>
 ***Notifications:***
@@ -71,7 +70,7 @@ Implementing all aspects of a production mindset in an interview setting would b
    - Discuss the importance of data backups and a basic recovery plan
 
 For an interview setting, implement these core elements to demo the solution on paper in project and be prepared to discuss other production considerations. Explain that while a full production setup would include more comprehensive measures, these key points demonstrate the understanding of production-readiness without overcomplicating the interview project.
-Remember to emphasize that in a real job scenario, you would work with the team to implement a more comprehensive set of production practices tailored to the specific needs and scale of the project.<br>
+Remember to emphasize that in a real job scenario,  would work with the team to implement a more comprehensive set of production practices tailored to the specific needs and scale of the project.<br>
 
 ***日本語で簡単説明：***
 面接の設定において、以下の核心的な要素をプロジェクトに実装し、ペーパー上でソリューションをデモンストレーションします。また、その他の本番環境に関する考慮事項についても議論する準備をしておきます：
