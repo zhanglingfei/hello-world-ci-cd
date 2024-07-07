@@ -1,5 +1,5 @@
 # hello-world-ci-cd
-## the project demo url is http://34.84.2.130/
+## This project demo url is: http://34.84.2.130/
 # create GKE cluster using gcloud command
 gcloud container clusters create hello-world-cluster-tokyo \
   --zone asia-northeast1-a \
