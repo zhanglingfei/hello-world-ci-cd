@@ -3,7 +3,7 @@
 
 ● Web Application - Take an existing open-source web application project including frontend, backend, and database. （UPDATE: ***create a open-source NodeJS web application***)
 
-● Infrastructure as Code - Use tools like Terraform to host the application in the cloud. <br>
+● Infrastructure as Code - Use tools like Terraform to host the application in the cloud. <br> (***DONE***)
  ***Feedback***:
 Terraform is primarily an Infrastructure as Code (IaC) tool designed for managing and provisioning cloud resources, not for directly hosting applications. It excels at creating and configuring infrastructure components like virtual machines, networks, and storage, which are necessary for running applications. However, Terraform does not handle the actual deployment or runtime management of applications themselves.<br>
 For application hosting, tools like Kubernetes, Docker, or platform-specific services are typically used in conjunction with the infrastructure Terraform sets up. Terraform creates the environment where applications can be hosted, but it doesn't manage the application lifecycle directly.
