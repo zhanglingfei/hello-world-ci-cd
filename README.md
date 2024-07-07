@@ -73,7 +73,7 @@ This project demonstrates a simple "Hello World" application deployed on Google 
 ### Steps
 1. **Clone the Repository:**
    ```sh
-   git clone https://github.com/your-repo/hello-world.git
+   git clone https://github.com/zhanglingfei/hello-world.git
    cd hello-world
 
 # Deployment Instructions
@@ -147,9 +147,9 @@ Note: The current pipeline does not perform linting or static code analysis. The
 - ![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/7ceb8ddd-a9a6-4504-8d38-1fd28d91579b)
 
 ## Kubernetes Cluster Security
-- **Network Security:** Use Kubernetes Network Policies to control traffic flow between pods. Enable Private Google Access and use VPC Service Controls to protect your GKE clusters.
+- **Network Security:** Use Kubernetes Network Policies to control traffic flow between pods. Enable Private Google Access and use VPC Service Controls to protect GKE clusters.
 - **RBAC (Role-Based Access Control):** Implement RBAC to control access to Kubernetes resources. Grant minimal required permissions to users and service accounts.
-- **Node Security:** Use Google’s Container-Optimized OS or another secure minimal base image for your nodes. Regularly update and patch Kubernetes nodes.
+- **Node Security:** Use Google’s Container-Optimized OS or another secure minimal base image for nodes. Regularly update and patch Kubernetes nodes.
 
 ## Data Security
 - **Encryption:** Encrypt data at rest using Google Cloud’s default encryption and data in transit using TLS.
@@ -169,7 +169,7 @@ Proposal: Enhancing GKE Monitoring with Datadog
 
 ### 1. Unified Monitoring Platform:
    - Datadog offers a single platform for monitoring infrastructure, applications, and logs.
-   - Benefit: Centralizes monitoring across your entire stack, including GKE, Node.js, and any other services you might be using.
+   - Benefit: Centralizes monitoring across entire stack, including GKE, Node.js, and any other services you might be using.
 
 #### 2. Advanced Application Performance Monitoring (APM):
    - Datadog APM provides detailed insights into Node.js application performance.
@@ -180,11 +180,11 @@ Proposal: Enhancing GKE Monitoring with Datadog
    - Benefit: Provides detailed metrics on container health, resource usage, and orchestration.
 
 ### 4. Custom Metrics and Dashboards:
-   - Easily create custom metrics and dashboards tailored to your application's needs.
-   - Benefit: Visualize and track KPIs specific to your Node.js application and business logic.
+   - Easily create custom metrics and dashboards tailored to application's needs.
+   - Benefit: Visualize and track KPIs specific to Node.js application and business logic.
 
 ### 5. Log Management and Analysis:
-   - Centralized log collection and analysis from all components of your stack.
+   - Centralized log collection and analysis from all components of stack.
    - Benefit: Easier troubleshooting and ability to correlate logs with metrics and traces.
 
 ### 6. Real-time Alerting:
@@ -206,12 +206,12 @@ Proposal: Enhancing GKE Monitoring with Datadog
 ### Implementation Steps:
 
 ### 1. Install Datadog Agent:
-   - Deploy the Datadog Agent as a DaemonSet in your GKE cluster.
+   - Deploy the Datadog Agent as a DaemonSet in GKE cluster.
    - Use Helm charts for easy deployment and management.
 
 ### 2. Configure Node.js APM:
-   - Install and configure the Datadog APM library in your Node.js application.
-   - Instrument your code to capture custom metrics and traces.
+   - Install and configure the Datadog APM library in Node.js application.
+   - Instrument code to capture custom metrics and traces.
 
 ### 3. Set up Log Collection:
    - Configure log collection for both container and application logs.
@@ -222,7 +222,7 @@ Proposal: Enhancing GKE Monitoring with Datadog
 
 ### 5. Configure Alerts:
    - Set up alerts for critical metrics, log patterns, and anomalies.
-   - Integrate with your incident management system (e.g., PagerDuty).
+   - Integrate with incident management system (e.g., PagerDuty).
 
 ### 6. Implement Synthetic Tests:
    - Create synthetic tests to monitor key user journeys and API endpoints.
@@ -231,11 +231,11 @@ Proposal: Enhancing GKE Monitoring with Datadog
    - Set up relevant Datadog integrations for other services you're using (e.g., databases, caching layers).
 
 ### 8. Train Team:
-   - Provide training to your team on using Datadog for monitoring and troubleshooting.
+   - Provide training to team on using Datadog for monitoring and troubleshooting.
 
 ## Cost Considerations:
 - Evaluate Datadog pricing based on the number of hosts, log volume, and required features.
 - Compare with the cost of using advanced features of Google Cloud's operations suite.
 
-By implementing Datadog alongside Google's native monitoring tools, you'll gain deeper insights into your application's performance, improve troubleshooting capabilities, and enhance your overall observability strategy. This combination allows you to leverage the best of both platforms, ensuring comprehensive monitoring of your GKE-deployed Node.js application.
+By implementing Datadog alongside Google's native monitoring tools, you'll gain deeper insights into application's performance, improve troubleshooting capabilities, and enhance overall observability strategy. This combination allows you to leverage the best of both platforms, ensuring comprehensive monitoring of GKE-deployed Node.js application.
 
