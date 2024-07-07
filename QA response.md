@@ -9,6 +9,20 @@ Terraform is primarily an Infrastructure as Code (IaC) tool designed for managin
 For application hosting, tools like Kubernetes, Docker, or platform-specific services are typically used in conjunction with the infrastructure Terraform sets up. Terraform creates the environment where applications can be hosted, but it doesn't manage the application lifecycle directly.
 
 ● Continuous Integration - Create a CI pipeline using GitHub actions (preferred but you can use others as well), and the required stages that you think would add value. (***DONE***)<br>
+***Code Quality and Testing:***
+- Add a linting step for your JavaScript code
+- Include unit testing
+- Add code coverage reporting
+***Security Scanning:***
+-Implement a vulnerability scan for your Docker image （**DONE by GCP**)
+- Add a step to check for sensitive information in your code (**DONE by Github**)<br>
+***Performance:***
+-Implement caching for npm packages to speed up builds<br>
+***Notifications:***
+-Add a step to send notifications on successful/failed deployments
+-Environment-specific deployments:
+-Add conditional steps for different environments (e.g., staging, production)
+
 ● Docker - Create a docker image from the CI. (***DONE***)<br>
 ● Continuous Deployment - Automate the deployment process using Kubernetes. Include deployment to minimize downtime and risk. (***DONE***)<br>
 ● Monitoring and logging - Integrate monitoring and logging solutions to collect logs from infrastructure and applications. Describe how you can use these tools for detecting and troubleshooting issues. <br>
