@@ -112,6 +112,11 @@ This project demonstrates a simple "Hello World" application deployed on Google 
 - **Image Security:** Use trusted base images, regularly update them, and scan Docker images for vulnerabilities using tools like Trivy or Clair.
 - **Least Privilege Principle:** Run containers with the least privilege required. Avoid running containers as the root user.
 - **Immutable Infrastructure:** Treat containers as immutable; rebuild and redeploy rather than patching running containers.
+- gcloud services enable containeranalysis.googleapis.com
+- gcloud services enable binaryauthorization.googleapis.com
+- gcloud services enable containerscanning.googleapis.com
+
+- ![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/7ceb8ddd-a9a6-4504-8d38-1fd28d91579b)
 
 ## Kubernetes Cluster Security
 - **Network Security:** Use Kubernetes Network Policies to control traffic flow between pods. Enable Private Google Access and use VPC Service Controls to protect your GKE clusters.
@@ -126,3 +131,8 @@ This project demonstrates a simple "Hello World" application deployed on Google 
 - **Log Aggregation:** Use Google Cloud Logging and Monitoring to collect and analyze logs from applications and infrastructure.
 - **Intrusion Detection:** Implement intrusion detection systems (IDS) and security information and event management (SIEM) tools.
 - **Alerting:** Set up alerts for critical security events like unauthorized access attempts or unusual network traffic patterns.
+  ![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/67982502-0869-48fb-b448-526f1e1514d8)
+
+
+
+
