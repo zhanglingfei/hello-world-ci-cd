@@ -30,7 +30,8 @@ gcloud container clusters create hello-world-cluster-tokyo \
 
 ## Overview
 This project demonstrates a simple "Hello World" application deployed on Google Kubernetes Engine (GKE) using a CI/CD pipeline configured with GitHub Actions. The deployment utilizes containerized environments managed via Docker, with infrastructure defined and managed using Terraform.
-![image](https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/a2175734-922b-40fa-a1cf-5f2cd894754c)
+
+<img src="https://github.com/zhanglingfei/hello-world-ci-cd/assets/11581357/a2175734-922b-40fa-a1cf-5f2cd894754c" alt="image" width="700"/>
 
 ## Project Structure:
 project-root/<br>
